@@ -5,6 +5,7 @@
  *
  * @package    PhpMyAdmin-Transformations
  * @subpackage Wikidata
+ * @author     Romain de Bossoreille
  */
 namespace PhpMyAdmin\Plugins\Transformations\Output;
 
