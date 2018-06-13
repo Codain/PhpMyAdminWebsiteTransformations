@@ -43,8 +43,11 @@ class Text_Plain_Openstreetmap extends TransformationsPlugin
     public static function getInfo()
     {
         return __(
-            'Displays an OpenStreetMap link; the column contains the OpenStreetMap ID. The first'
-            . ' and only option is a default type if not specified in the value (\'node\', \'way\' or \'relation\') (optional).'
+            'Displays an OpenStreetMap link; the column contains the OpenStreetMap ID. Three'
+            . ' patterns allowed:'
+            . ' 1. \'w1234\' i.e. the first letter of the type of item (n for node, w for way, r for relation) followed by the id;'
+            . ' 2. \'way1234\' i.e. the type of item (\'node\', \'way\' or \'relation\') followed by the id;'
+            . ' 3. \'1234\' with the optional option set to either \'node\', \'way\' or \'relation\'.'
         );
     }
 
@@ -64,28 +67,28 @@ class Text_Plain_Openstreetmap extends TransformationsPlugin
         $type = '';
         $id = 0;
         
-		// Cases 'n1234' or 'w1234' or 'r1234'
+        // Cases 'n1234' or 'w1234' or 'r1234'
         $matches = null;
-        $matchPattern = preg_match('/^(n|w|r)([0-9]*)$/', $buffer, $matches, PREG_OFFSET_CAPTURE, 0);
+        $matchPattern = preg_match('/^(n|node|w|way|r|relation)([0-9]*)$/', $buffer, $matches, PREG_OFFSET_CAPTURE, 0);
         if($matchPattern == 1)
         {
-            if($matches[1] == 'n')
+            if($matches[1] == 'n' || $matches[1] == 'node')
             {
                 $type = 'node';
                 $id = intval($matches[2]);
             }
-            else if($matches[1] == 'w')
+            else if($matches[1] == 'w' || $matches[1] == 'way')
             {
                 $type = 'way';
                 $id = intval($matches[2]);
             }
-            else if($matches[1] == 'r')
+            else if($matches[1] == 'r' || $matches[1] == 'relation')
             {
                 $type = 'relation';
                 $id = intval($matches[2]);
             }
         }
-		// Cases '1234' with default 'node', 'way' or 'relation'
+        // Cases '1234' with default 'node', 'way' or 'relation'
         else if(isset($options[0]) && ($options[0] == 'node' || $options[0] == 'way' || $options[0] == 'relation') && is_numeric($buffer))
         {
             $type = $options[0];
