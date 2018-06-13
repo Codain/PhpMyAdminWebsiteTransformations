@@ -27,14 +27,14 @@ class Text_Plain_Wikidata extends TransformationsPlugin
     /**
      * Constructor of the class
      */
-	public function __construct()
-	{
-		if(!array_key_exists('WikidataLink', $GLOBALS['cfg']['DefaultTransformations']))
-		{
-			$GLOBALS['cfg']['DefaultTransformations']['WikidataLink'] = array('');
-		}
-	}
-	
+    public function __construct()
+    {
+        if(!array_key_exists('WikidataLink', $GLOBALS['cfg']['DefaultTransformations']))
+        {
+            $GLOBALS['cfg']['DefaultTransformations']['WikidataLink'] = array('');
+        }
+    }
+    
     /**
      * Gets the transformation description of the specific plugin
      *
@@ -72,7 +72,7 @@ class Text_Plain_Wikidata extends TransformationsPlugin
 
 
     /* ~~~~~~~~~~~~~~~~~~~~ Getters and Setters ~~~~~~~~~~~~~~~~~~~~ */
-	
+    
     /**
      * Gets the transformation name of the specific plugin
      *
@@ -82,7 +82,7 @@ class Text_Plain_Wikidata extends TransformationsPlugin
     {
         return "WikidataLink";
     }
-	
+    
     /**
      * Gets the plugin`s MIME type
      *
