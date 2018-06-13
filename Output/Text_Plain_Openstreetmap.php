@@ -72,20 +72,20 @@ class Text_Plain_Openstreetmap extends TransformationsPlugin
         $matchPattern = preg_match('/^(n|node|w|way|r|relation)([0-9]*)$/', $buffer, $matches, PREG_OFFSET_CAPTURE, 0);
         if($matchPattern == 1)
         {
-            if($matches[1] == 'n' || $matches[1] == 'node')
+            if($matches[1][0] == 'n' || $matches[1][0] == 'node')
             {
                 $type = 'node';
-                $id = intval($matches[2]);
+                $id = intval($matches[2][0]);
             }
-            else if($matches[1] == 'w' || $matches[1] == 'way')
+            else if($matches[1][0] == 'w' || $matches[1][0] == 'way')
             {
                 $type = 'way';
-                $id = intval($matches[2]);
+                $id = intval($matches[2][0]);
             }
-            else if($matches[1] == 'r' || $matches[1] == 'relation')
+            else if($matches[1][0] == 'r' || $matches[1][0] == 'relation')
             {
                 $type = 'relation';
-                $id = intval($matches[2]);
+                $id = intval($matches[2][0]);
             }
         }
         // Cases '1234' with default 'node', 'way' or 'relation'
